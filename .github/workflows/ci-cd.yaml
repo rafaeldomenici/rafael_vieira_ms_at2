@@ -22,4 +22,4 @@ jobs:
           cache: 'maven'
 
       - name: Compilar e Testar com Maven
-        run: ./mvnw clean verify
+        run: mvn clean verify
