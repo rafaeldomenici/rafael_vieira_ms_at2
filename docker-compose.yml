@@ -16,17 +16,10 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      # monta a pasta config-repo (do seu Mac) dentro do container em /config-repo
-      - ./config-repo:/config-repo
+      - ./config-repo5:/config-repo5
     environment:
-      # backend "native" = le os .properties direto da pasta montada acima.
-      # O config-repo/ e uma pasta comum, sem .git, entao o backend git
-      # (spring.cloud.config.server.git.uri) nao funciona aqui: ele exige um
-      # repositorio Git de verdade e falha com "No .git at file:///config-repo".
-      # Sem configuracao, os servicos subiriam sem server.port, na porta 8080,
-      # e as portas publicadas abaixo apontariam para onde ninguem escuta.
       - SPRING_PROFILES_ACTIVE=native
-      - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:///config-repo
+      - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:///config-repo5
     networks:
       - microservicos-net
 
@@ -108,7 +101,8 @@ services:
     build: ./gateway
     container_name: gateway
     depends_on:
-      - eureka-server               # gateway só precisa do eureka pra descobrir os serviços
+      - eureka-server
+      - config-server
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     ports:
