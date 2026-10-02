@@ -1,0 +1,23 @@
+name: CI Exemplo
+
+on:
+  push:
+    branches: [ "atividade-rafael-vieira" ] 
+  pull_request:
+    branches: [ "atividade-rafael-vieira" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do Repositorio
+        uses: actions/checkout@atividade-rafael-vieira
+
+      - name: Configurar o Java 17
+        uses: actions/actions-setup-java@atividade-rafael-vieira
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Compilar e Testar com Maven
+        run: mvn clean package -pl fornecedores-service -am
