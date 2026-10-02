@@ -22,4 +22,5 @@ jobs:
           cache: 'maven'
 
       - name: Compilar e Testar com Maven
-        run: mvn clean package -pl fornecedores-service -am
+        working-directory: ./fornecedores-service
+        run: mvn clean package
