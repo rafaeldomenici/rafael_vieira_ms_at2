@@ -2,20 +2,20 @@ name: CI Exemplo
 
 on:
   push:
-    branches: [ "atividade-rafael-vieira" ] 
+    branches:
+      - atividade-rafael-vieira
   pull_request:
-    branches: [ "atividade-rafael-vieira" ]
+    branches:
+      - atividade-rafael-vieira
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do Repositorio
-        uses: actions/checkout@atividade-rafael-vieira
-
+        uses: actions/checkout@v4
       - name: Configurar o Java 17
-        uses: actions/actions-setup-java@atividade-rafael-vieira
-        with:
+        uses: actions/actions-setup-java@v4
           java-version: '17'
           distribution: 'temurin'
 
